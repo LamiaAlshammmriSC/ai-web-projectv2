@@ -1,7 +1,21 @@
 """طبقة قاعدة البيانات: كل التعامل مع MySQL موجود هنا."""
 import mysql.connector
 from config import DB_CONFIG
-
+SCHEMA = [
+    """CREATE TABLE IF NOT EXISTS analyses (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        text TEXT NOT NULL,
+        sentiment VARCHAR(20) NOT NULL,
+        confidence DECIMAL(5,2) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4""",
+    """CREATE TABLE IF NOT EXISTS training_data (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        text TEXT NOT NULL,
+        label VARCHAR(20) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4""",
+]
 
 def get_connection():
     return mysql.connector.connect(**DB_CONFIG)
@@ -18,7 +32,10 @@ def _run(query, params=(), fetch=False):
         return cur.lastrowid
     finally:
         conn.close()
-
+def init_db():
+    """ينشئ الجداول لو مو موجودة."""
+    for query in SCHEMA:
+        _run(query)
 
 def save_analysis(text, sentiment, confidence):
     return _run(
