@@ -1,0 +1,147 @@
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --primary: #4f46e5;
+  --positive: #16a34a;
+  --neutral: #ca8a04;
+  --negative: #dc2626;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", Tahoma, "Noto Sans Arabic", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px 60px;
+}
+header h1 { font-size: 2rem; margin-bottom: 8px; }
+header p { opacity: .9; }
+
+main {
+  max-width: 760px;
+  margin: -35px auto 40px;
+  padding: 0 16px;
+  display: grid;
+  gap: 18px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .06);
+}
+.card h3 { margin-bottom: 12px; }
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+  font: inherit;
+  resize: vertical;
+  transition: border-color .2s;
+}
+textarea:focus { outline: none; border-color: var(--primary); }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+#charCount { color: var(--muted); font-size: .9rem; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: transform .1s, opacity .2s;
+}
+button:active { transform: scale(.97); }
+button:disabled { opacity: .6; cursor: wait; }
+
+#analyzeBtn {
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 28px;
+  font-weight: 600;
+}
+
+.hidden { display: none; }
+
+.result-head { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.emoji { font-size: 3rem; }
+#resultConfidence { color: var(--muted); }
+.label-positive { color: var(--positive); }
+.label-neutral  { color: var(--neutral); }
+.label-negative { color: var(--negative); }
+
+.bar { margin-bottom: 8px; }
+.bar-label { display: flex; justify-content: space-between; font-size: .9rem; }
+.bar-track { background: #eef0f4; border-radius: 6px; height: 10px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; transition: width .6s ease; }
+
+.feedback {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  margin-top: 16px; padding-top: 14px; border-top: 1px dashed #e5e7eb;
+  font-size: .9rem; color: var(--muted);
+}
+.fb { background: #f3f4f6; padding: 6px 12px; }
+.fb:hover { background: #e5e7eb; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stat {
+  background: var(--card); border-radius: var(--radius); padding: 16px;
+  text-align: center; box-shadow: 0 4px 18px rgba(0, 0, 0, .06);
+  border-top: 4px solid;
+}
+.stat b { display: block; font-size: 1.8rem; }
+.stat span { color: var(--muted); }
+.stat.positive { border-color: var(--positive); }
+.stat.neutral  { border-color: var(--neutral); }
+.stat.negative { border-color: var(--negative); }
+
+#historyList { list-style: none; }
+#historyList li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid #f0f0f0;
+}
+#historyList li:last-child { border-bottom: none; }
+.h-text { flex: 1; word-break: break-word; }
+.h-meta { font-size: .8rem; color: var(--muted); }
+.badge {
+  font-size: .8rem; padding: 3px 10px; border-radius: 20px; color: #fff; white-space: nowrap;
+}
+.badge.positive { background: var(--positive); }
+.badge.neutral  { background: var(--neutral); }
+.badge.negative { background: var(--negative); }
+.del { background: none; color: var(--muted); font-size: 1.1rem; }
+.del:hover { color: var(--negative); }
+.empty { color: var(--muted); text-align: center; padding: 10px; }
+
+#toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: #111827; color: #fff; padding: 12px 22px; border-radius: 10px;
+  opacity: 0; transition: all .3s;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#toast.error { background: var(--negative); }
+
+@media (max-width: 520px) {
+  header h1 { font-size: 1.5rem; }
+  .stat b { font-size: 1.4rem; }
+}

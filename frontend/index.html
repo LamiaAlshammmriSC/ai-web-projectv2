@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>محلل المشاعر الذكي</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🧠 محلل المشاعر الذكي</h1>
+    <p>اكتب أي نص بالعربي أو الإنجليزي، والذكاء الاصطناعي يحدد إذا كان إيجابي أو سلبي أو محايد</p>
+  </header>
+
+  <main>
+    <!-- بطاقة الإدخال -->
+    <section class="card">
+      <textarea id="textInput" maxlength="2000" placeholder="مثال: الخدمة كانت ممتازة والتوصيل سريع..."></textarea>
+      <div class="row">
+        <span id="charCount">0 / 2000</span>
+        <button id="analyzeBtn">تحليل النص</button>
+      </div>
+    </section>
+
+    <!-- بطاقة النتيجة -->
+    <section class="card hidden" id="resultCard">
+      <div class="result-head">
+        <span id="resultEmoji" class="emoji"></span>
+        <div>
+          <h2 id="resultLabel"></h2>
+          <p id="resultConfidence"></p>
+        </div>
+      </div>
+      <div id="scoreBars"></div>
+      <div class="feedback">
+        <span>النتيجة غلط؟ صححها والنموذج يتعلم:</span>
+        <button class="fb" data-label="positive">😊 إيجابي</button>
+        <button class="fb" data-label="neutral">😐 محايد</button>
+        <button class="fb" data-label="negative">😞 سلبي</button>
+      </div>
+    </section>
+
+    <!-- الإحصائيات -->
+    <section class="stats">
+      <div class="stat positive"><b id="statPositive">0</b><span>إيجابي</span></div>
+      <div class="stat neutral"><b id="statNeutral">0</b><span>محايد</span></div>
+      <div class="stat negative"><b id="statNegative">0</b><span>سلبي</span></div>
+    </section>
+
+    <!-- السجل -->
+    <section class="card">
+      <h3>📜 سجل التحليلات (من قاعدة البيانات)</h3>
+      <ul id="historyList"></ul>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
