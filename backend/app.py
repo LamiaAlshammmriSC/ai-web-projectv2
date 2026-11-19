@@ -32,6 +32,13 @@ def train_model():
         extra = []
     return model.train(extra)
 
+
+try:
+    db.init_db()
+    print("✅ قاعدة البيانات جاهزة")
+except Exception as e:
+    print(f"⚠️ قاعدة البيانات غير جاهزة: {e}")
+
 _trained = train_model()
 # السماح للواجهة بالاتصال حتى لو فُتحت من Apache في XAMPP (منفذ مختلف)
 @app.after_request
